@@ -1,23 +1,23 @@
-<h1 align="center">bindme</h1>
+<h1 align="center">BindMe</h1>
 
 <p align="center">
   <img src="assets/technologies/bindme-logo.png" alt="BindMe Logo" height="300">
 </p>
 
 <p align="center">
-  Simple DI Framework for Python 3.x 🐍
+  <strong>Simple DI Framework for Python 3.x 🐍</strong>
 </p>
 
 <hr>
 
-<h1 align="center">Usage:</h1>
+<h1 align="center">Usage</h1>
 
 <p align="center">
-  Instruction:
+  <strong>Installation Instructions:</strong>
 </p>
 
 <p align="center">
-  Install the package:
+  To install the package, run:
 </p>
 
 <p align="center">
@@ -29,19 +29,19 @@
 <h1 align="center">Features</h1>
 
 <p align="center">
-  Interesting:
+  <strong>Interesting Highlights:</strong>
 </p>
 
-<p align="center">
-  * **Simple 📕** - everything you need is here!<br>
-  * **Fast ⚡** - awesome work speed!<br>
-  * **Low 🍃** - weighs nothing at all!
-</p>
+<ul align="center">
+  <p><strong>Simple 📕</strong> - everything you need is here!</>
+  <p><strong>Fast ⚡</strong> - awesome work speed!</p>
+  <p><strong>Low 🍃</strong> - weighs nothing at all!</p>
+</ul>
 
 <hr>
 
-<h1 align="center">UseCases</h1>
+<h1 align="center">Use Cases</h1>
 
 <p align="center">
-  Examples:
+  <strong>Examples:</strong>
 </p>
