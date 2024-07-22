@@ -1,0 +1,5 @@
+include README.md
+include assets/*
+include LICENSE
+recursive-include bindme *
+exclude examples/*
