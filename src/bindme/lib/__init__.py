@@ -13,3 +13,4 @@ else:
 
 __version__ = '0.1.0'
 __author__ = '@daniyarsus'
+__doc__ = "In process..."
