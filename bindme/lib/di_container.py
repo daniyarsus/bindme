@@ -3,7 +3,6 @@ from abc import ABC, abstractmethod
 
 T = TypeVar('T', bound=ABC)
 
-
 class DIContainer:
     def __init__(self):
         self._registrations: Dict[Type[ABC], Type[ABC]] = {}

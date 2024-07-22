@@ -17,12 +17,19 @@ class ItemServiceInterface(ABC):
 ### --- implementation
 
 
+from pydantic import BaseModel
+
+
+class ItemDTO(BaseModel):
+    name: str
+
+
 class ItemServiceImplement(ItemServiceInterface):
-    def create_item(self, dto: dict[str, Any]) -> dict[str, Any]:
-        return dto
+    def create_item(self, dto: ItemDTO) -> dict[str, Any]:
+        return {"name": dto.name}
 
     def get_item(self, dto: dict[str, Any]) -> dict[str, Any]:
-        return dto
+        return dto.copy()
 
 
 ### --- BindMe DI settings
@@ -33,14 +40,29 @@ from bindme import container, inject
 container.register(abstract_class=ItemServiceInterface, concrete_class=ItemServiceImplement)
 
 
+@inject
+def get_item(dto: ItemDTO, item_service: ItemServiceInterface) -> Any:
+    print(item_service.create_item(dto))
+
+
+get_item(dto=ItemDTO(name="Bob"), item_service=ItemServiceInterface)
+
+
+class ItemServiceNew:
+    @inject
+    def __init__(self, item_service: ItemServiceInterface):
+        self.item_service = item_service
+
+    def create_item(self, dto: ItemDTO) -> dict[str, Any]:
+        self.item_service.create_item(dto)
+        print(dto.name)
+
+
+item_service = ItemServiceNew(item_service=ItemServiceInterface)
+item_service.create_item(dto=ItemDTO(name="Bob"))
+
+
 ### --- FastAPI routers settings
-
-from pydantic import BaseModel
-
-
-class ItemDTO(BaseModel):
-    name: str
-
 
 from fastapi import APIRouter
 
@@ -48,11 +70,10 @@ router = APIRouter()
 
 
 @router.post("/item")
-@inject
 def create_item_controller(
-        dto: ItemDTO,
-        item_service: ItemServiceInterface # by @inject - implement will parse in function parameters
+        dto: ItemDTO
 ) -> dict[str, Any]:
+    item_service = container.resolve(abstract_class=ItemServiceInterface) #  you can use container directly in code
     return item_service.create_item(dto=dto)
 
 
