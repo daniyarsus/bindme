@@ -1,5 +1,6 @@
 from typing import Type, TypeVar, Dict, Any
 from abc import ABC, abstractmethod
+import inspect
 
 T = TypeVar('T', bound=ABC)
 
@@ -16,7 +17,15 @@ class DIContainer:
         concrete_class = self._registrations.get(abstract_class)
         if not concrete_class:
             raise ValueError(f"{abstract_class}'s realization hasn't been registered!")
-        return concrete_class()
+        return self._create_instance(concrete_class)
+
+    def _create_instance(self, concrete_class: Type[T]) -> T:
+        constructor_params = inspect.signature(concrete_class.__init__).parameters
+        kwargs = {}
+        for param in constructor_params.values():
+            if param.annotation in self._registrations:
+                kwargs[param.name] = self.resolve(param.annotation)
+        return concrete_class(**kwargs)
 
 
 container = DIContainer()
