@@ -27,5 +27,11 @@ class DIContainer:
                 kwargs[param.name] = self.resolve(param.annotation)
         return concrete_class(**kwargs)
 
+    def clear(self) -> None:
+        self._registrations.clear()
+
+    def list_registrations(self) -> Dict[Type[ABC], Type[ABC]]:
+        return self._registrations.copy()
+
 
 container = DIContainer()

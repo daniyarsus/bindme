@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: bindme
-Version: 0.2.0
+Version: 0.3.0
 Summary: Simple DI Framework for Python 3.x 🐍
 Home-page: https://github.com/daniyarsus/bindme
 Author: daniyarsus
@@ -11,8 +11,6 @@ Classifier: Operating System :: OS Independent
 Requires-Python: >=3.6
 Description-Content-Type: text/markdown
 License-File: LICENSE
-
-![Repository Icon](assets/technologies/bindme-icon.png)
 
 <h1 align="center">BindMe</h1>
 

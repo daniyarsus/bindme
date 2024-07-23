@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="bindme",
-    version="0.2.0",
+    version="0.3.0",
     author="daniyarsus",
     author_email="daniyar.kanu@mail.ru",
     description="Simple DI Framework for Python 3.x 🐍",
@@ -16,4 +16,5 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
+    include_package_data=True
 )
