@@ -39,6 +39,8 @@ from bindme import container, inject
 
 container.register(abstract_class=ItemServiceInterface, concrete_class=ItemServiceImplement)
 
+print(container.list_registrations())
+
 
 @inject
 def get_item(dto: ItemDTO, item_service: ItemServiceInterface) -> Any:

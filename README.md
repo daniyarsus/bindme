@@ -1,5 +1,3 @@
-![Repository Icon](assets/technologies/bindme-icon.png)
-
 <h1 align="center">BindMe</h1>
 
 <p align="center">
