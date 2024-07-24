@@ -48,9 +48,11 @@ class DIContainer:
     def _create_instance(self, concrete_class: Type[T]) -> T:
         constructor_params = inspect.signature(concrete_class.__init__).parameters
         kwargs = {}
-        for param in constructor_params.values():
+        for name, param in constructor_params.items():
+            if name == 'self':
+                continue
             if param.annotation in self._registrations:
-                kwargs[param.name] = self.resolve(param.annotation)
+                kwargs[name] = self.resolve(param.annotation)
         return concrete_class(**kwargs)
 
     def clear(self) -> None:

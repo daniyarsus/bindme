@@ -62,7 +62,7 @@ from abc import ABC, abstractmethod
 from typing import Any, NoReturn
 
 
-class ItemServiceInterface:
+class ItemServiceInterface(ABC):
     @abstractmethod
     def create_one(self, dto: dict[str, Any]) -> NoReturn:
         raise NotImplementedError("<create one> method is not implemented!")
@@ -74,13 +74,17 @@ class ItemServiceInterface:
 
 # create implement
 
+from typing import override
+
 from src.interfaces import ItemServiceInterface
 
 
 class ItemServiceImplement(ItemServiceInterface):
+    @override
     def create_one(self, dto: dict[str, Any]) -> None:
         print(f"Item with {dto} is created!")
-
+    
+    @override
     def get_one(self, dto: dict[str, Any]) -> None:
         print(f"Item with {dto} is get!")
 
@@ -102,7 +106,7 @@ from bindme import container
 from src.implements.item import ItemServiceInterface
 
 
-def get_item_service():
+def get_item_service() -> None:
     item_service = container.resolve(abstract_class=ItemServiceInterface)
     item_service.create_one({"name": "Bob"})
     # item_service.get_one({"name": "Bob"})
@@ -118,7 +122,7 @@ from src.implements.item import ItemServiceInterface
 
 
 @inject
-def get_item_service(item_service: ItemServiceInterface):
+def get_item_service(item_service: ItemServiceInterface) -> None:
     item_service.create_one(dto={"name": "Bob"})
     # item_service.get_one(dto={"name": "Bob"})
 
