@@ -76,7 +76,7 @@ class ItemServiceInterface(ABC):
 
 from typing import override
 
-from src.interfaces import ItemServiceInterface
+from src.interfaces.item import ItemServiceInterface
 
 
 class ItemServiceImplement(ItemServiceInterface):
@@ -90,7 +90,6 @@ class ItemServiceImplement(ItemServiceInterface):
 
 
 # configure bindme
-
 
 from bindme import container
 
@@ -128,7 +127,6 @@ def get_item_service(item_service: ItemServiceInterface) -> None:
 
 
 get_item_service(item_service=ItemServiceImplement)
-
 
 
 ```
