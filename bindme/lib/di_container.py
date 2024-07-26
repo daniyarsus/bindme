@@ -5,32 +5,6 @@ import inspect
 T = TypeVar('T', bound=ABC)
 
 class DIContainer:
-    """
-    A simple Dependency Injection (DI) Container for managing and resolving dependencies.
-
-    This container allows you to register abstract classes with their concrete implementations,
-    and automatically resolves and injects dependencies when creating instances.
-
-    Example:
-        container = DIContainer()
-
-        # Define abstract class and its implementation
-        class AbstractService(ABC):
-            @abstractmethod
-            def perform_action(self) -> None:
-                pass
-
-        class ConcreteService(AbstractService):
-            def perform_action(self) -> None:
-                print("Action performed!")
-
-        # Register the implementation with the container
-        container.register(AbstractService, ConcreteService)
-
-        # Resolve the implementation and use it
-        service = container.resolve(AbstractService)
-        service.perform_action()  # Output: Action performed!
-    """
     def __init__(self):
         self._registrations: Dict[Type[ABC], Type[ABC]] = {}
 
@@ -48,11 +22,9 @@ class DIContainer:
     def _create_instance(self, concrete_class: Type[T]) -> T:
         constructor_params = inspect.signature(concrete_class.__init__).parameters
         kwargs = {}
-        for name, param in constructor_params.items():
-            if name == 'self':
-                continue
+        for param in constructor_params.values():
             if param.annotation in self._registrations:
-                kwargs[name] = self.resolve(param.annotation)
+                kwargs[param.name] = self.resolve(param.annotation)
         return concrete_class(**kwargs)
 
     def clear(self) -> None:
