@@ -113,7 +113,7 @@ def get_item_service() -> None:
 
 get_item_service()
 
-# use @injection decorator
+# use @injector decorator to parse in parameters
 
 from bindme import inject
 
